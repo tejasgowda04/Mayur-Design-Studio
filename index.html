@@ -1,0 +1,2872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Mayur Design Studio | Interior · Architecture · Construction</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Jost:wght@300;400;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  
+  <script>
+    document.documentElement.className = "js";
+  </script>
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES & RESET
+       ========================================================================== */
+    :root {
+      --bg: #fcf4f1;
+      --bg2: #f6e8ee;
+      --card: #fff;
+      --line: #ecd6dc;
+      --fg: #241238;
+      --mut: #6d5f80;
+      --navy: #2a1248;
+      --gold: #d6456f;
+      --gold2: #ff7a6e;
+      --gold3: #ffc2a8;
+      --grad: linear-gradient(120deg, #b3265a, #ff7a6e 50%, #c2457a);
+      color-scheme: light;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px;
+      background: var(--bg);
+    }
+
+    body {
+      background: 
+        radial-gradient(900px 600px at 88% 6%, #ffd5cbaa 0, transparent 60%),
+        radial-gradient(700px 500px at 0 55%, #e3d6f5aa 0, transparent 60%),
+        var(--bg);
+      color: var(--fg);
+      font: 400 16px/1.6 Jost, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 90;
+      opacity: .05;
+      mix-blend-mode: multiply;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    h1, h2, h3 {
+      font-family: Cinzel, serif;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.12;
+    }
+
+    /* ==========================================================================
+       2. TYPOGRAPHY & COMMON UTILITIES
+       ========================================================================== */
+    .tag {
+      font: 700 10px Syncopate, sans-serif;
+      letter-spacing: .35em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .gt {
+      background: var(--grad);
+      background-size: 220%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: sh 7s linear infinite;
+    }
+
+    @keyframes sh {
+      to { background-position: 220%; }
+    }
+
+    section {
+      padding: 9vh 5vw;
+      position: relative;
+    }
+
+    h2 {
+      font-size: clamp(24px, 4vw, 44px);
+      margin: 10px 0 0;
+    }
+
+    .hint {
+      color: var(--mut);
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .sm {
+      font-size: 12px;
+      color: var(--mut);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1px solid var(--gold);
+      background: none;
+      color: var(--navy);
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .btn.f {
+      background: var(--grad);
+      border-color: transparent;
+      color: #2a0f24;
+      animation: glow 2.6s ease-in-out infinite;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.04);
+    }
+
+    .btn.s {
+      padding: 9px 18px;
+      font-size: 13px;
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 0 rgba(255, 122, 110, 0), 0 6px 16px rgba(214, 69, 111, .25);
+      }
+      50% {
+        box-shadow: 0 0 28px rgba(255, 122, 110, .55), 0 6px 22px rgba(214, 69, 111, .3);
+      }
+    }
+
+    /* Scroll progress & custom cursor & tooltip */
+    #pg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: var(--grad);
+      transform: scaleX(0);
+      transform-origin: left;
+      z-index: 950;
+    }
+
+    #cur {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(rgba(255, 122, 110, .9), transparent 70%);
+      pointer-events: none;
+      z-index: 960;
+      transform: translate(-50%, -50%);
+      transition: width .25s, height .25s;
+      left: 0;
+      top: 0;
+    }
+
+    #cur.big {
+      width: 64px;
+      height: 64px;
+    }
+
+    @media (hover: none) {
+      #cur { display: none; }
+    }
+
+    #tt {
+      position: fixed;
+      left: 50%;
+      bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+      transform: translate(-50%, 30px);
+      background: #fff;
+      border: 1px solid var(--gold);
+      color: var(--navy);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: .4s;
+      box-shadow: 0 10px 30px rgba(42, 18, 72, .15);
+    }
+
+    #tt.o {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* ==========================================================================
+       3. REVEAL ANIMATIONS
+       ========================================================================== */
+    .js .r {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .js .r.pop {
+      transform: scale(.88) translateY(20px);
+    }
+
+    .js .r.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .hr {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .ready .hr {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ==========================================================================
+       4. PRELOADER
+       ========================================================================== */
+    #ld {
+      position: fixed;
+      inset: 0;
+      z-index: 800;
+      background: radial-gradient(circle at 50% 42%, #fffafa, #ecdbe3 75%);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transition: transform 1s cubic-bezier(.7, 0, .2, 1);
+    }
+
+    #ld.out {
+      transform: translateY(-100%);
+    }
+
+    #ld::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(0deg, #2a12480a 0 1px, transparent 1px 40px),
+        repeating-linear-gradient(90deg, #2a12480a 0 1px, transparent 1px 40px);
+    }
+
+    #ld > div {
+      position: relative;
+    }
+
+    #lm {
+      width: min(60vw, 240px);
+      overflow: visible;
+    }
+
+    .sh {
+      stroke: #d6456f;
+      stroke-width: 1.6;
+      fill-opacity: 0;
+      stroke-dasharray: 320;
+      stroke-dashoffset: 320;
+      stroke-linejoin: round;
+      animation: dw .9s var(--d) forwards, fl2 .7s calc(var(--d) + .8s) forwards;
+    }
+
+    @keyframes dw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes fl2 {
+      to { fill-opacity: 1; stroke-width: 0; }
+    }
+
+    .lsw {
+      fill: none;
+      stroke: #ff7a6e;
+      stroke-width: 2;
+      stroke-dasharray: 260;
+      stroke-dashoffset: 260;
+      animation: dw 1s 1.9s forwards;
+    }
+
+    .wm {
+      font: 700 clamp(32px, 10vw, 64px) Cinzel, serif;
+      letter-spacing: .06em;
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      color: var(--navy);
+    }
+
+    .wm span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(24px) scale(.7);
+      animation: lp .6s forwards cubic-bezier(.2, 1.5, .4, 1);
+    }
+
+    .wm .v {
+      color: var(--gold);
+    }
+
+    @keyframes lp {
+      to { opacity: 1; transform: none; }
+    }
+
+    .wc {
+      font: 700 clamp(9px, 2.6vw, 14px) Syncopate, sans-serif;
+      letter-spacing: .55em;
+      padding-left: .55em;
+      color: var(--gold);
+      opacity: 0;
+      animation: fi 1s 2.5s forwards;
+      margin-top: 6px;
+    }
+
+    .tgl {
+      font: 400 clamp(9px, 2.3vw, 12px) Syncopate, sans-serif;
+      letter-spacing: .2em;
+      color: var(--mut);
+      margin-top: 16px;
+      opacity: 0;
+      animation: fi 1s 3s forwards;
+      text-transform: uppercase;
+    }
+
+    @keyframes fi {
+      to { opacity: 1; }
+    }
+
+    /* ==========================================================================
+       5. NAVIGATION & MOBILE MENU
+       ========================================================================== */
+    #nv {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: calc(10px + env(safe-area-inset-top, 0px)) 5vw 10px;
+      transition: .4s;
+      background: linear-gradient(#fcf4f1ee, transparent);
+    }
+
+    #nv.nsc {
+      background: #fcf4f1f0;
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand svg {
+      width: 46px;
+      height: 29px;
+    }
+
+    .bt b {
+      display: block;
+      font: 700 18px Cinzel, serif;
+      letter-spacing: .08em;
+      line-height: 1;
+      color: var(--navy);
+    }
+
+    .bt small {
+      display: block;
+      font: 700 8px Syncopate, sans-serif;
+      letter-spacing: .34em;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .dl {
+      display: none;
+      gap: 24px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .dl a {
+      transition: .3s;
+    }
+
+    .dl a:hover {
+      color: var(--gold);
+    }
+
+    @media (min-width: 1000px) {
+      .dl { display: flex; }
+    }
+
+    .nr {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mb {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: .4s;
+      position: relative;
+    }
+
+    @media (min-width: 1000px) {
+      .mb { display: none; }
+    }
+
+    .mb span {
+      grid-area: 1/1;
+      width: 18px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: .45s cubic-bezier(.7, 0, .2, 1);
+    }
+
+    .mb span:nth-child(1) { transform: translateY(-6px); }
+    .mb span:nth-child(3) { transform: translateY(6px); }
+
+    .mb.o {
+      background: var(--grad);
+      box-shadow: 0 0 22px rgba(255, 122, 110, .6);
+      rotate: 90deg;
+    }
+
+    .mb.o span:nth-child(1) { transform: rotate(45deg); }
+    .mb.o span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .mb.o span:nth-child(3) { transform: rotate(-45deg); }
+
+    #mn {
+      position: fixed;
+      inset: 0;
+      z-index: 650;
+      background: radial-gradient(circle at 80% 10%, #ffd9c9, #fcf4f1 70%);
+      clip-path: circle(0 at calc(100% - 40px) 36px);
+      visibility: hidden;
+      transition: clip-path .8s cubic-bezier(.7, 0, .2, 1), visibility 0s .8s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 9vw;
+    }
+
+    #mn.o {
+      clip-path: circle(150% at calc(100% - 40px) 36px);
+      visibility: visible;
+      transition: clip-path .8s cubic-bezier(.7, 0, .2, 1), visibility 0s;
+    }
+
+    #mn a.l {
+      font: 600 clamp(24px, 5.5vw, 40px)/1.35 Cinzel, serif;
+      color: var(--navy);
+      display: block;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: .6s;
+    }
+
+    #mn.o a.l {
+      opacity: 1;
+      transform: none;
+      transition-delay: calc(.25s + var(--i) * .06s);
+    }
+
+    #mn a.l:hover {
+      color: var(--gold);
+      padding-left: 14px;
+    }
+
+    #mn .mf {
+      margin-top: 5vh;
+      color: var(--mut);
+      font-size: 14px;
+    }
+
+    /* ==========================================================================
+       6. HERO SECTION
+       ========================================================================== */
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 15vh 5vw 8vh;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hbg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background: #f1dfe6;
+      overflow: hidden;
+    }
+
+    .hs {
+      position: absolute;
+      inset: 0;
+      background: var(--i) center/cover no-repeat;
+      opacity: 0;
+      animation: hs 18s infinite;
+    }
+
+    .hs:nth-child(2) { animation-delay: 6s; }
+    .hs:nth-child(3) { animation-delay: 12s; }
+    .hs:first-child  { animation-delay: -1s; }
+
+    @keyframes hs {
+      0%   { opacity: 0; scale: 1; }
+      6%   { opacity: 1; }
+      34%  { opacity: 1; }
+      40%  { opacity: 0; }
+      100% { opacity: 0; scale: 1.08; }
+    }
+
+    .hbg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(90deg, rgba(252, 244, 241, .97), rgba(252, 244, 241, .86) 55%, rgba(252, 244, 241, .5)),
+        linear-gradient(transparent 60%, var(--bg));
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: 
+        repeating-linear-gradient(0deg, #2a12480b 0 1px, transparent 1px 48px),
+        repeating-linear-gradient(90deg, #2a12480b 0 1px, transparent 1px 48px);
+      -webkit-mask: linear-gradient(90deg, #000, transparent 85%);
+      mask: linear-gradient(90deg, #000, transparent 85%);
+    }
+
+    .open {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    .open i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold2);
+      box-shadow: 0 0 12px var(--gold2);
+      animation: blink 1.1s steps(2) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: .2; }
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5.6vw, 70px);
+      line-height: 1.08;
+      max-width: 15ch;
+    }
+
+    .hero p.lead {
+      max-width: 500px;
+      margin: 18px 0 24px;
+      color: var(--mut);
+      font-size: 16px;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .h-soc {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .h-soc-lbl {
+      font-size: 13px;
+      color: var(--mut);
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+
+    .btn-soc {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 99px;
+      background: #ffffffd4;
+      border: 1px solid #d6456f55;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 600;
+      transition: .3s;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(42, 18, 72, .06);
+    }
+
+    .btn-soc .ai {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+    }
+
+    .btn-soc:hover {
+      background: #fff;
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(214, 69, 111, .22);
+      color: var(--gold);
+    }
+
+    .htags {
+      display: none;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+      max-width: 480px;
+    }
+
+    @media (min-width: 900px) {
+      .htags { display: flex; }
+    }
+
+    .htags span {
+      padding: 6px 14px;
+      border: 1px solid #d6456f55;
+      border-radius: 99px;
+      font-size: 13px;
+      color: var(--navy);
+      background: #ffffffcc;
+      transition: .3s;
+    }
+
+    .htags span:hover {
+      border-color: var(--gold);
+      box-shadow: 0 6px 18px rgba(214, 69, 111, .2);
+      transform: translateY(-2px);
+    }
+
+    /* Rotating Orb Visualization */
+    .orb {
+      position: relative;
+      width: min(72vw, 290px);
+      aspect-ratio: 1;
+      margin: 46px auto 0;
+    }
+
+    @media (min-width: 900px) {
+      .orb {
+        position: absolute;
+        right: 6vw;
+        top: 50%;
+        translate: 0 -50%;
+        width: min(42vw, 540px);
+        margin: 0;
+      }
+    }
+
+    .orb::before {
+      content: "";
+      position: absolute;
+      inset: -6%;
+      border: 1px dashed rgba(214, 69, 111, .5);
+      border-radius: 50%;
+    }
+
+    .ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent, #ff7a6ecc, transparent 40%, #2a124866, transparent 75%);
+      -webkit-mask: radial-gradient(circle, transparent 58%, #000 59%, #000 61%, transparent 62%);
+      mask: radial-gradient(circle, transparent 58%, #000 59%, #000 61%, transparent 62%);
+      animation: spin 18s linear infinite;
+    }
+
+    .ring.b {
+      inset: 12%;
+      animation-duration: 12s;
+      animation-direction: reverse;
+    }
+
+    @keyframes spin {
+      to { rotate: 360deg; }
+    }
+
+    .egl {
+      position: absolute;
+      inset: 6%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 122, 110, .3), transparent 65%);
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 0;
+      animation: spin 14s linear infinite;
+    }
+
+    .orbit.o2 {
+      inset: 12%;
+      animation-duration: 9s;
+      animation-direction: reverse;
+    }
+
+    .orbit i {
+      position: absolute;
+      left: 50%;
+      top: -5px;
+      width: 10px;
+      height: 10px;
+      margin-left: -5px;
+      border-radius: 50%;
+      background: var(--gold2);
+      box-shadow: 0 0 14px var(--gold2);
+    }
+
+    .o2 i {
+      background: var(--navy);
+      box-shadow: 0 0 12px #2a124888;
+    }
+
+    .orb .mkc {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+      width: 58%;
+      animation: fl 5s ease-in-out infinite;
+      filter: drop-shadow(0 12px 22px rgba(42, 18, 72, .25));
+    }
+
+    @keyframes fl {
+      50% { transform: translateY(-12px); }
+    }
+
+    .tg2 {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      white-space: nowrap;
+      padding: 7px 13px;
+      border-radius: 99px;
+      background: #fffffff2;
+      border: 1px solid #ff7a6e88;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--navy);
+      box-shadow: 0 8px 22px rgba(42, 18, 72, .12);
+      animation: bob 5s ease-in-out infinite;
+    }
+
+    .tg2 i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold2);
+      animation: pu 2s infinite;
+    }
+
+    @keyframes bob {
+      50% { translate: 0 -9px; }
+    }
+
+    @keyframes pu {
+      0% { box-shadow: 0 0 0 0 rgba(255, 122, 110, .6); }
+      70%, 100% { box-shadow: 0 0 0 8px rgba(255, 122, 110, 0); }
+    }
+
+    @media (max-width: 700px) {
+      .tg2.hm { display: none; }
+    }
+
+    .em {
+      position: absolute;
+      bottom: -10px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold2);
+      z-index: -1;
+      animation: up linear infinite;
+      opacity: .7;
+    }
+
+    @keyframes up {
+      to { translate: 30px -105vh; opacity: 0; }
+    }
+
+    .mq {
+      background: var(--grad);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 11px 0;
+      font: 600 15px Cinzel, serif;
+      letter-spacing: .12em;
+      color: #2a0f24;
+      box-shadow: 0 10px 30px rgba(214, 69, 111, .25);
+    }
+
+    .mq div {
+      display: inline-block;
+      animation: mq 30s linear infinite;
+    }
+
+    .mq span {
+      margin: 0 20px;
+    }
+
+    @keyframes mq {
+      to { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================================
+       7. PROCESS / BUILD SECTION
+       ========================================================================== */
+    #build {
+      height: 240vh;
+      padding: 0;
+    }
+
+    .bst {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: calc(env(safe-area-inset-top, 0px) + 10vh) 5vw 3vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      background: 
+        radial-gradient(700px 400px at 50% 58%, #ffd0c466, transparent),
+        repeating-linear-gradient(0deg, #2a12480a 0 1px, transparent 1px 44px),
+        repeating-linear-gradient(90deg, #2a12480a 0 1px, transparent 1px 44px);
+    }
+
+    .bh {
+      text-align: center;
+    }
+
+    .bh h2 {
+      margin-inline: auto;
+    }
+
+    #bsv {
+      flex: 0 1 auto;
+      width: min(100%, 900px);
+      max-height: 46vh;
+      min-height: 0;
+      margin: 0 auto;
+      display: block;
+      overflow: visible;
+    }
+
+    #bsv .d {
+      fill: none;
+      stroke: #2a1248;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    #bsv .gd { stroke: #d6456f; }
+    #bsv .wl { fill: #2a1248; fill-opacity: 0; }
+    #bsv .wn { fill: #ff8a70; fill-opacity: 0; stroke: #d6456f; stroke-width: 1.5; }
+    #bsv .hf { stroke: #2a124833; stroke-width: 1; }
+
+    #bsv .hk {
+      animation: sw 3.4s ease-in-out infinite alternate;
+      transform-box: fill-box;
+      transform-origin: 50% 0;
+    }
+
+    @keyframes sw {
+      from { rotate: -4deg; }
+      to   { rotate: 4deg; }
+    }
+
+    .sps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      max-width: 980px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (max-width: 700px) {
+      .sps { grid-template-columns: 1fr 1fr; }
+      .sps .stp:last-child { grid-column: 1 / -1; }
+    }
+
+    .stp {
+      opacity: .3;
+      transition: opacity .8s, border-color .8s;
+      border-top: 2px solid var(--line);
+      padding-top: 10px;
+      font-size: 13px;
+      color: var(--mut);
+      line-height: 1.4;
+    }
+
+    .stp.on {
+      opacity: 1;
+      border-color: var(--gold);
+    }
+
+    .stp b {
+      display: block;
+      font: 600 14px Cinzel, serif;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    /* ==========================================================================
+       8. ABOUT SECTION
+       ========================================================================== */
+    .ab {
+      display: grid;
+      gap: 34px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 900px) {
+      .ab {
+        grid-template-columns: 1.1fr 1fr;
+        gap: 6vw;
+      }
+    }
+
+    .ab p {
+      color: var(--mut);
+      margin-top: 14px;
+      max-width: 52ch;
+    }
+
+    .ab .btn {
+      margin-top: 22px;
+    }
+
+    .col2 {
+      position: relative;
+      padding: 0 0 34px;
+    }
+
+    .ap {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/4.4;
+      box-shadow: 0 30px 60px rgba(42, 18, 72, .2);
+      border: 1px solid var(--line);
+      background: #ecd9e2;
+    }
+
+    .ap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ap2 {
+      position: absolute;
+      right: -3%;
+      top: -6%;
+      width: 38%;
+      aspect-ratio: 1;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 4px solid var(--bg);
+      box-shadow: 0 20px 40px rgba(42, 18, 72, .22);
+      background: #ecd9e2;
+    }
+
+    .ap2 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lgc {
+      position: absolute;
+      left: -2%;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 18px 40px rgba(42, 18, 72, .2);
+    }
+
+    .lgc svg {
+      width: 54px;
+      height: 34px;
+    }
+
+    .sts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 7vh auto 0;
+      max-width: 1100px;
+    }
+
+    @media (max-width: 700px) {
+      .sts { grid-template-columns: 1fr 1fr; }
+    }
+
+    .st2 {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 14px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(42, 18, 72, .06);
+    }
+
+    .st2 b {
+      display: block;
+      font: 600 clamp(26px, 3.6vw, 40px) Cinzel, serif;
+      line-height: 1.1;
+    }
+
+    .st2 span {
+      color: var(--mut);
+      font-size: 13px;
+    }
+
+    /* ==========================================================================
+       9. SERVICES SECTION
+       ========================================================================== */
+    .sv {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 5vh auto 0;
+      max-width: 1100px;
+    }
+
+    .svc {
+      background: linear-gradient(160deg, #fff, #faeff0);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px 20px;
+      transition: transform .4s, border-color .4s, box-shadow .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .svc:hover {
+      border-color: var(--gold);
+      box-shadow: 0 18px 40px rgba(214, 69, 111, .2);
+      transform: translateY(-8px);
+    }
+
+    .svc svg {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 12px;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .svc .no {
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      font: 600 34px Cinzel, serif;
+      color: #d6456f22;
+    }
+
+    .svc h3 {
+      font-size: 19px;
+      margin-bottom: 6px;
+    }
+
+    .svc p {
+      color: var(--mut);
+      font-size: 15px;
+    }
+
+    /* ==========================================================================
+       10. BLOCK VS BRICK SECTION
+       ========================================================================== */
+    .cz {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 20px 0 14px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 11px 6px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .tabs .on {
+      background: var(--grad);
+      border-color: transparent;
+      color: #2a0f24;
+      box-shadow: 0 6px 18px rgba(214, 69, 111, .3);
+    }
+
+    .cmp2 {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 700px) {
+      .cmp2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .box {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      transition: .4s;
+    }
+
+    .box.dim {
+      opacity: .55;
+    }
+
+    .box:not(.dim) {
+      border-color: var(--gold);
+      box-shadow: 0 14px 36px rgba(214, 69, 111, .15);
+    }
+
+    .box ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .box li {
+      padding: 7px 0 7px 26px;
+      position: relative;
+      font-size: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .box li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       11. ESTIMATOR / BUDGET PLANNER
+       ========================================================================== */
+    .es {
+      display: grid;
+      gap: 5vw;
+      background: linear-gradient(120deg, #f9ecee, #fcf4f1);
+      border-block: 1px solid var(--line);
+    }
+
+    @media (min-width: 800px) {
+      .es {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+    }
+
+    .es > div:first-child {
+      max-width: 520px;
+    }
+
+    .es label {
+      display: block;
+      margin: 22px 0 10px;
+      color: var(--mut);
+      font-size: 15px;
+    }
+
+    .es input[type=range] {
+      width: 100%;
+      accent-color: #ff7a6e;
+    }
+
+    .ch {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ch button {
+      padding: 10px 20px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .ch .on {
+      background: var(--grad);
+      border-color: transparent;
+      color: #2a0f24;
+      box-shadow: 0 6px 16px rgba(214, 69, 111, .35);
+    }
+
+    .out {
+      border: 1px solid var(--gold);
+      border-radius: 20px;
+      padding: 28px;
+      background: #fff;
+      box-shadow: 0 20px 50px rgba(214, 69, 111, .18);
+    }
+
+    .out b {
+      display: block;
+      font: 600 clamp(26px, 4vw, 42px) Cinzel, serif;
+      line-height: 1.15;
+      margin: 8px 0;
+    }
+
+    .out p {
+      color: var(--mut);
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    /* ==========================================================================
+       12. TRANSFORMATION (BEFORE / AFTER)
+       ========================================================================== */
+    #ba {
+      text-align: center;
+    }
+
+    #ba h2 {
+      margin-inline: auto;
+    }
+
+    .bag {
+      display: grid;
+      gap: 18px;
+      max-width: 1000px;
+      margin: 28px auto 0;
+    }
+
+    @media (min-width: 800px) {
+      .bag { grid-template-columns: 1fr 1fr; }
+    }
+
+    .ba {
+      position: relative;
+      aspect-ratio: 4/3;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      touch-action: pan-y;
+      cursor: ew-resize;
+      user-select: none;
+      -webkit-user-select: none;
+      background: #f1dfe6;
+      box-shadow: 0 24px 50px rgba(42, 18, 72, .18);
+    }
+
+    .af, .bf {
+      position: absolute;
+      inset: 0;
+      background: var(--im) center/cover no-repeat, linear-gradient(135deg, #e6def3, #f1dfe6);
+    }
+
+    .bf.edge {
+      background-color: #fff;
+      filter: url(#edge);
+    }
+
+    .bf.raw {
+      filter: grayscale(1) contrast(1.1) brightness(1.12);
+    }
+
+    .hd2 {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: var(--grad);
+      box-shadow: 0 0 14px var(--gold2);
+    }
+
+    .hd2::after {
+      content: "‹ ›";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      letter-spacing: 2px;
+    }
+
+    .cl {
+      position: absolute;
+      top: 12px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      background: #ffffffe6;
+      border: 1px solid #d6456f55;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .cl.l { left: 12px; }
+    .cl.r { right: 12px; }
+
+    /* ==========================================================================
+       13. TESTIMONIALS / REVIEWS
+       ========================================================================== */
+    #reviews {
+      text-align: center;
+      padding: 8vh 5vw;
+    }
+
+    #reviews h2 {
+      margin-inline: auto;
+    }
+
+    .lnr {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .lnr::before, .lnr::after {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .tsw {
+      max-width: 640px;
+      margin: 3.5vh auto 0;
+      overflow: hidden;
+      touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .tk {
+      display: flex;
+      gap: 14px;
+      will-change: transform;
+    }
+
+    .tc2 {
+      flex: 0 0 100%;
+      padding: 22px 24px 18px;
+      border-radius: 20px;
+      background: linear-gradient(160deg, #fff, #faeff0);
+      border: 1px solid var(--line);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      opacity: .5;
+      transition: opacity .6s, border-color .6s;
+      box-shadow: 0 14px 36px rgba(42, 18, 72, .08);
+    }
+
+    .tc2.on {
+      opacity: 1;
+      border-color: #ff7a6e88;
+    }
+
+    .tc2::before {
+      content: "\201C";
+      position: absolute;
+      left: 16px;
+      top: 8px;
+      font: 70px/1 Cinzel, serif;
+      color: rgba(214, 69, 111, .25);
+      pointer-events: none;
+    }
+
+    .tc2 q {
+      display: block;
+      font: italic 500 clamp(16px, 2.3vw, 19px)/1.55 Jost, sans-serif;
+      margin: 26px 0 16px;
+      quotes: none;
+      color: var(--fg);
+    }
+
+    .tw2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .av {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--grad);
+      color: #2a0f24;
+      display: grid;
+      place-items: center;
+      flex: none;
+      font: 700 18px Cinzel, serif;
+    }
+
+    .tw2 b {
+      display: block;
+      font-weight: 700;
+      line-height: 1.2;
+      font-size: 15px;
+    }
+
+    .tw2 .s {
+      color: var(--mut);
+      font-size: 13px;
+    }
+
+    .st5 {
+      color: var(--gold2);
+      letter-spacing: 2px;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .tcn {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .dt {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .dt i {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: #d9c3d0;
+      transition: .4s;
+      cursor: pointer;
+    }
+
+    .dt i.on {
+      width: 34px;
+      background: var(--grad);
+    }
+
+    /* ==========================================================================
+       14. CONTACT SECTION & MAP
+       ========================================================================== */
+    #contact > * {
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sub {
+      color: var(--mut);
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    .cg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4vh;
+    }
+
+    @media (min-width: 900px) {
+      .cg { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .ci2 {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 18px;
+      transition: .3s;
+      display: block;
+    }
+
+    a.ci2:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(214, 69, 111, .15);
+    }
+
+    .ci2 small {
+      display: block;
+      color: var(--mut);
+      font-size: 13px;
+    }
+
+    .ci2 b {
+      font-weight: 500;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+
+    .sg4, .sg {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .sg4 a, .sg a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 6px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: .3s;
+    }
+
+    .sg4 a:hover, .sg a:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(214, 69, 111, .15);
+    }
+
+    .ai {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: block;
+    }
+
+    .fm3 {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px 26px 28px;
+      margin-top: 20px;
+      display: grid;
+      gap: 4px;
+      box-shadow: 0 24px 60px rgba(42, 18, 72, .1);
+    }
+
+    .map-wrap {
+      margin-top: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(42, 18, 72, .08);
+    }
+
+    .map-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--line);
+      background: #fcf4f1;
+    }
+
+    .map-head small {
+      display: block;
+      color: var(--mut);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 700;
+    }
+
+    .map-head b {
+      font-size: 16px;
+      color: var(--navy);
+    }
+
+    .map-frame {
+      position: relative;
+      width: 100%;
+      height: 380px;
+    }
+
+    .map-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 600px) {
+      .map-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .map-frame {
+        height: 280px;
+      }
+    }
+
+    .u {
+      position: relative;
+      padding-top: 18px;
+    }
+
+    .u input, .u textarea, .u select {
+      width: 100%;
+      background: none;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      color: var(--fg);
+      font: inherit;
+      font-size: 16px;
+      outline: 0;
+      border-radius: 0;
+      transition: .3s;
+      resize: none;
+    }
+
+    .u label {
+      position: absolute;
+      left: 0;
+      top: 30px;
+      color: var(--mut);
+      transition: .25s;
+      pointer-events: none;
+      font-size: 15px;
+    }
+
+    .u input:focus, .u textarea:focus, .u select:focus {
+      border-color: var(--gold);
+    }
+
+    .u input:focus + label,
+    .u input:not(:placeholder-shown) + label,
+    .u textarea:focus + label,
+    .u textarea:not(:placeholder-shown) + label,
+    .u select + label {
+      top: 3px;
+      font-size: 11px;
+      color: var(--gold);
+    }
+
+    .row2 {
+      display: grid;
+      gap: 4px;
+    }
+
+    @media (min-width: 600px) {
+      .row2 {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+    }
+
+    .fm3 .btn {
+      justify-self: start;
+      margin-top: 16px;
+    }
+
+    /* ==========================================================================
+       15. FOOTER & FLOATING ACTION BUTTONS
+       ========================================================================== */
+    footer {
+      background: #f6e8ee;
+      border-top: 1px solid var(--line);
+      color: var(--mut);
+      font-size: 14px;
+    }
+
+    .ft {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 28px;
+      padding: 6vh 5vw 3vh;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 700px) {
+      .ft { grid-template-columns: 1fr 1fr; }
+    }
+
+    .ft h4 {
+      font: 600 15px Cinzel, serif;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .ft a {
+      display: block;
+      margin-bottom: 6px;
+      transition: .3s;
+    }
+
+    .ft a:hover {
+      color: var(--gold);
+      padding-left: 6px;
+    }
+
+    .fs {
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fs .ai {
+      width: 26px;
+      height: 26px;
+    }
+
+    .fb {
+      border-top: 1px solid var(--line);
+      padding: 16px 5vw;
+      text-align: center;
+    }
+
+    .fab {
+      position: fixed;
+      right: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 600;
+      box-shadow: 0 6px 18px rgba(42, 18, 72, .3);
+      transition: .3s;
+    }
+
+    .fab:hover {
+      transform: scale(1.1);
+    }
+
+    .fab svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .fab.c {
+      bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .fab.w {
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      animation: pl 2.4s infinite;
+    }
+
+    @keyframes pl {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, .55);
+      }
+      70%, 100% {
+        box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+      .js .r, .js .hr {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  
+    .brand svg{height:32px}.lgc svg{height:38px}
+    .sh{stroke:#b9852f}.lsw{stroke:#d9a84e}
+    .cmp2{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    #projects{overflow:hidden}
+    .c3d{position:relative;height:clamp(300px,46vw,400px);perspective:1200px;max-width:1100px;margin:5vh auto 0;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+    .c3d:active{cursor:grabbing}
+    .c3i{position:absolute;left:50%;top:0;width:clamp(210px,56vw,360px);height:clamp(270px,40vw,360px);margin-left:calc(clamp(210px,56vw,360px) / -2);border-radius:20px;background-size:cover;background-position:center;border:1px solid var(--line);overflow:hidden;transition:transform .8s cubic-bezier(.25,.8,.25,1),opacity .8s,filter .8s;box-shadow:0 30px 50px rgba(42,18,72,.28)}
+    .c3i::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(42,18,72,.92))}
+    .c3i .cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:2}
+    .c3i .cap h3{color:#fff;font-size:18px}.c3i .cap span{font-size:12px;color:#ffc2a8}
+    .c3i .no{position:absolute;top:12px;right:14px;z-index:2;font:600 28px Cinzel,serif;color:#ffffffaa}
+    .c3i.act{border-color:var(--gold2);animation:c3f 4s ease-in-out infinite,c3g 2.6s ease-in-out infinite}
+    .c3i.act::before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);z-index:3;animation:c3s 3.5s infinite}
+    @keyframes c3f{50%{translate:0 -10px}}
+    @keyframes c3g{50%{box-shadow:0 34px 64px rgba(255,122,110,.6)}}
+    @keyframes c3s{to{left:140%}}
+    .c3n{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:3vh}
+    .c3n button{width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);background:#fff;color:var(--navy);font-size:20px;cursor:pointer;transition:.3s}
+    .c3n button:hover:not(:disabled){background:var(--grad);color:#2a0f24;transform:scale(1.1)}.c3n button:disabled{opacity:.3}
+    .c3dots{display:flex;gap:7px}.c3dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.4s}.c3dots i.on{width:26px;border-radius:6px;background:var(--grad)}
+  </style>
+</head>
+<body>
+
+  <!-- Top progress bar & custom cursor -->
+  <div id="pg"></div>
+  <div id="cur"></div>
+
+  <!-- SVG Global Icons & Gradients -->
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a6a1c"/><stop offset=".5" stop-color="#e9bb62"/><stop offset="1" stop-color="#8a5a14"/></linearGradient>
+      <radialGradient id="igg" cx=".3" cy="1.05" r="1.2">
+        <stop offset="0" stop-color="#feda75"/>
+        <stop offset=".5" stop-color="#d62976"/>
+        <stop offset="1" stop-color="#4f5bd5"/>
+      </radialGradient>
+      <radialGradient id="gl">
+        <stop offset="0" stop-color="#ff8a70" stop-opacity=".45"/>
+        <stop offset="1" stop-color="#ff8a70" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <symbol id="i-wa" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="11" fill="#25D366"/>
+      <path d="M10 38l2.4-7.2A14 14 0 1 1 17.8 35.6z" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M19 17c-1 1.6-.6 4.2 2 7.2s5.4 4.2 7 3.4l1.6-1.8-3-1.8-1.4 1.2c-1.6-.8-3.2-2.2-4-4l1.2-1.4-1.8-3z" fill="#fff"/>
+    </symbol>
+    <symbol id="i-call" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="11" fill="#34C759"/>
+      <path d="M16 12h5l2.4 6-3 1.8a15 15 0 0 0 7 7l1.8-3 6 2.4v5a3 3 0 0 1-3 3A22 22 0 0 1 13 15a3 3 0 0 1 3-3z" fill="#fff"/>
+    </symbol>
+    <symbol id="i-ig" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="11" fill="url(#igg)"/>
+      <rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/>
+      <circle cx="24" cy="24" r="6.5" fill="none" stroke="#fff" stroke-width="3"/>
+      <circle cx="31.5" cy="16.5" r="1.8" fill="#fff"/>
+    </symbol>
+    <symbol id="i-fb" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="11" fill="#1877F2"/>
+      <path d="M29 25.5l.8-5.3h-5.1v-3.4c0-1.5.7-2.9 3.1-2.9h2.4V9.3s-2.2-.4-4.2-.4c-4.3 0-7.2 2.6-7.2 7.4v3.9h-4.6v5.3h4.6V38h5.8V25.5H29z" fill="#fff"/>
+    </symbol>
+    <symbol id="i-map" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="11" fill="#fff" stroke="#ecd6dc"/>
+      <path d="M0 34l14-5 10 6 12-5 12 4v14a11 11 0 0 1-11 11H11A11 11 0 0 1 0 48z" fill="#34A853" opacity=".35"/>
+      <path d="M24 41S12 30 12 20a12 12 0 0 1 24 0c0 10-12 21-12 21z" fill="#EA4335"/>
+      <circle cx="24" cy="20" r="4.8" fill="#fff"/>
+    </symbol>
+  </svg>
+
+  <svg width="0" height="0" style="position: absolute;">
+    <filter id="edge" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values=".33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0"/>
+      <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1" preserveAlpha="true"/>
+      <feColorMatrix type="matrix" values="-3.8 0 0 0 1 -3.6 0 0 0 1 -3 0 0 0 1 0 0 0 1 0"/>
+    </filter>
+  </svg>
+
+  <!-- Preloader Screen -->
+  <div id="ld">
+    <div>
+      <svg id="lm" viewBox="0 0 100 70"></svg>
+      <div class="wm" id="wm"></div>
+      <div class="wc">DESIGN STUDIO</div>
+      <div class="tgl">Functional | Affordable | Premium quality</div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav id="nv">
+    <a class="brand" href="#home">
+      <svg data-mk viewBox="0 0 100 70"></svg>
+      <span class="bt">
+        <b>MAYUR</b>
+        <small>DESIGN STUDIO</small>
+      </span>
+    </a>
+    <div class="dl">
+      <a href="#about">About</a>
+      <a href="#build">Process</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#estimate">Estimate</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nr">
+      <a class="btn s f" href="tel:+917448207486">Call now</a>
+      <button class="mb" id="mb" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mn">
+    <a class="l" style="--i:0" href="#home">Home</a>
+    <a class="l" style="--i:1" href="#about">About</a>
+    <a class="l" style="--i:2" href="#build">Our process</a>
+    <a class="l" style="--i:3" href="#services">Services</a>
+    <a class="l" style="--i:4" href="#projects">Projects</a>
+    <a class="l" style="--i:5" href="#estimate">Budget estimate</a>
+    <a class="l" style="--i:6" href="#reviews">Reviews</a>
+    <a class="l" style="--i:7" href="#contact">Contact</a>
+    <div class="mf">+91 74482 07486 &nbsp;|&nbsp; Pune | Nashik, Maharashtra</div>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="hbg">
+      <div class="hs" style="--i:url(https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=70)"></div>
+      <div class="hs" style="--i:url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=70)"></div>
+      <div class="hs" style="--i:url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=70)"></div>
+    </div>
+    <div class="open hr" style="transition-delay: .1s">
+      <i></i>Now taking projects in Pune &amp; Nashik
+    </div>
+    <h1 class="hr" style="transition-delay: .25s">
+      Interiors and homes with <span class="gt">style you can trust.</span>
+    </h1>
+    <p class="lead hr" style="transition-delay: .4s">
+      Design, architecture and construction under one roof. Functional layouts, affordable budgets and premium finishing, planned with Vastu in mind.
+    </p>
+    <div class="row hr" style="transition-delay: .55s">
+      <a class="btn f" href="tel:+917448207486">Call 74482 07486</a>
+      <a class="btn" href="#estimate">Get a free estimate</a>
+    </div>
+    <div class="h-soc hr" style="transition-delay: .65s">
+      <span class="h-soc-lbl">Follow us:</span>
+      <a class="btn-soc" href="https://instagram.com/mayur_designstudio" target="_blank" rel="noopener">
+        <svg class="ai"><use href="#i-ig"/></svg>Instagram
+      </a>
+      <a class="btn-soc" href="https://facebook.com" target="_blank" rel="noopener">
+        <svg class="ai"><use href="#i-fb"/></svg>Facebook
+      </a>
+    </div>
+    <div class="htags hr" style="transition-delay: .7s">
+      <span>Functional</span>
+      <span>Affordable</span>
+      <span>Premium quality</span>
+      <span>Vastu planning</span>
+    </div>
+    <div class="orb hr" style="transition-delay: .5s">
+      <div class="ring"></div>
+      <div class="ring b"></div>
+      <div class="egl"></div>
+      <div class="orbit"><i></i></div>
+      <div class="orbit o2"><i></i></div>
+      <svg class="mkc" data-mk viewBox="0 0 100 70"></svg>
+      <span class="tg2" style="top: 4%; left: -8%; animation-delay: -1s"><i></i>3D visualisation</span>
+      <span class="tg2" style="top: 30%; right: -8%; animation-delay: -2.5s"><i></i>Vastu planning</span>
+      <span class="tg2 hm" style="bottom: 24%; left: -10%; animation-delay: -3.5s"><i></i>Site supervision</span>
+      <span class="tg2" style="bottom: 2%; right: -2%; animation-delay: -.5s"><i></i>Premium finish</span>
+      <span class="tg2 hm" style="bottom: -8%; left: 6%; animation-delay: -4s"><i></i>Affordable interiors</span>
+    </div>
+  </header>
+
+  <!-- Scrolling Marquee Ticker -->
+  <div class="mq">
+    <div id="mq"></div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="ab">
+      <div>
+        <div class="tag r">About us</div>
+        <h2 class="r">Designed well, <span class="gt">built right.</span></h2>
+        <p class="r">
+          Mayur Design Studio plans and builds homes, apartments and commercial spaces across Pune and Nashik. The same team that draws your space also builds it, so what you approve on screen is what you get on site.
+        </p>
+        <p class="r">
+          Every interior is kept functional, affordable and premium, with Vastu in mind from the first sketch to the final light fitting.
+        </p>
+        <a href="#contact" class="btn f r">Talk to our team</a>
+      </div>
+      <div class="col2 r pop">
+        <div class="ap">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=70" alt="Modern home exterior">
+        </div>
+        <div class="ap2">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=70" alt="Bedroom interior">
+        </div>
+        <div class="lgc">
+          <svg data-mk viewBox="0 0 100 70"></svg>
+          <span class="bt"><b style="font-size: 15px">MAYUR</b><small>DESIGN STUDIO</small></span>
+        </div>
+      </div>
+    </div>
+    <div class="sts">
+      <div class="st2 r pop">
+        <b class="gt" data-n="65">0</b>
+        <span>Projects shared</span>
+      </div>
+      <div class="st2 r pop">
+        <b class="gt" data-n="1700" data-s="+">0</b>
+        <span>Instagram followers</span>
+      </div>
+      <div class="st2 r pop">
+        <b class="gt" data-n="2">0</b>
+        <span>Cities served</span>
+      </div>
+      <div class="st2 r pop">
+        <b class="gt" data-n="3">0</b>
+        <span>Core promises</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process / Build Section -->
+  <section id="build">
+    <div class="bst">
+      <div class="bh">
+        <div class="tag">How we build</div>
+        <h2>From foundation <span class="gt">to finish</span></h2>
+      </div>
+      <svg id="bsv" viewBox="0 0 800 520" aria-label="Animated construction illustration"></svg>
+      <div class="sps">
+        <div class="stp"><b>01 Plan</b>Concept, 3D and budget</div>
+        <div class="stp"><b>02 Foundation</b>Site setup and civil base</div>
+        <div class="stp"><b>03 Structure</b>Structure and partitions rise</div>
+        <div class="stp"><b>04 Finishing</b>Carpentry, paint and lighting</div>
+        <div class="stp"><b>05 Handover</b>Keys in hand, ready to move in</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="tag r">What we do</div>
+    <h2 class="r">Everything to <span class="gt">design it right</span></h2>
+    <div class="sv" id="sv"></div>
+  </section>
+
+  <!-- Projects 3D carousel -->
+  <section id="projects">
+    <div class="tag r">Portfolio</div>
+    <h2 class="r">Featured <span class="gt">projects</span></h2>
+    <p class="hint">Drag, swipe or use the arrows. It also slides on its own.</p>
+    <div class="c3d" id="c3d"></div>
+    <div class="c3n"><button id="c3p" aria-label="Previous">‹</button><div class="c3dots" id="c3dt"></div><button id="c3x" aria-label="Next">›</button></div>
+  </section>
+
+  <!-- Themes Section -->
+  <section id="choose">
+    <div class="cz">
+      <div class="tag r">Pick your style</div>
+      <h2 class="r">Choose your <span class="gt">theme</span></h2>
+      <p class="hint">Tap a theme to see its feel. We tailor each one to your rooms, budget and Vastu.</p>
+      <div class="tabs" id="tb">
+        <button class="on" data-k="eu">European</button>
+        <button data-k="mi">Minimalist</button>
+        <button data-k="sl">Straight line</button>
+      </div>
+      <div class="cmp2" id="cmp"></div>
+    </div>
+  </section>
+
+  <!-- Budget Planner / Estimator Section -->
+  <section class="es" id="estimate">
+    <div>
+      <div class="tag r">Free estimate</div>
+      <h2 class="r">Plan your space <span class="gt">before you start</span></h2>
+      <label>What do you need?</label>
+      <div class="ch" id="ty"><button class="on" data-r="Interior design">Interiors</button><button data-r="Architecture">Architecture</button><button data-r="Construction">Construction</button><button data-r="Turnkey solution">Turnkey</button></div>
+      <label>Built-up area: <b id="av">1200</b> sq ft</label>
+      <input type="range" id="ar" min="500" max="5000" step="50" value="1200">
+    </div>
+    <div class="out r pop">
+      <span class="tag">Your plan</span>
+      <b class="gt" id="tot">1,200 sq ft</b>
+      <p>Service: <b id="sl">Interior design</b>. Every space is different, so we prepare a detailed itemised estimate for free after a quick chat.</p>
+      <a class="btn f" id="wa" target="_blank" rel="noopener" href="#">Get my free estimate on WhatsApp</a>
+    </div>
+  </section>
+
+  <!-- Transformation Section -->
+  <section id="ba">
+    <div class="tag r">Transformation</div>
+    <h2 class="r">Bare shell <span class="gt">to finished space</span></h2>
+    <p class="hint">Drag the handle. Plans and bare rooms become finished interiors.</p>
+    <div class="bag" id="bag"></div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews">
+    <div class="tag lnr">Testimonials</div>
+    <h2>What our <span class="gt">clients say</span></h2>
+    <p class="hint">Sample reviews for demo. Drag, or wait, it slides on its own.</p>
+    <div class="tsw" id="tsw">
+      <div class="tk" id="tk"></div>
+    </div>
+    <div class="tcn">
+      <div class="dt" id="dt"></div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="tag r">Contact</div>
+    <h2 class="r">Let’s design <span class="gt">together</span></h2>
+    <p class="sub">Share your plot or flat size and your ideas. We reply on WhatsApp.</p>
+
+    <!-- Contact Info Cards -->
+    <div class="cg">
+      <a class="ci2" href="tel:+917448207486">
+        <small>Call the studio</small>
+        <b>+91 74482 07486</b>
+      </a>
+      <a class="ci2" href="https://instagram.com/mayur_designstudio" target="_blank" rel="noopener">
+        <small>Instagram</small>
+        <b>@mayur_designstudio</b>
+      </a>
+      <a class="ci2" href="https://facebook.com" target="_blank" rel="noopener">
+        <small>Facebook</small>
+        <b>Mayur Design Studio</b>
+      </a>
+      <a class="ci2" href="https://www.google.com/maps/search/?api=1&query=Pune+Maharashtra" target="_blank" rel="noopener">
+        <small>Location · Google Maps</small>
+        <b>Pune | Nashik, Maharashtra</b>
+      </a>
+    </div>
+
+    <!-- Quick Action Links -->
+    <div class="sg">
+      <a href="https://wa.me/917448207486?text=Hi%20Mayur%20Design%20Studio" target="_blank" rel="noopener">
+        <svg class="ai"><use href="#i-wa"/></svg>WhatsApp
+      </a>
+      <a href="tel:+917448207486">
+        <svg class="ai"><use href="#i-call"/></svg>Call
+      </a>
+      <a href="https://instagram.com/mayur_designstudio" target="_blank" rel="noopener">
+        <svg class="ai"><use href="#i-ig"/></svg>Instagram
+      </a>
+      <a href="https://facebook.com" target="_blank" rel="noopener">
+        <svg class="ai"><use href="#i-fb"/></svg>Facebook
+      </a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Pune+Maharashtra" target="_blank" rel="noopener">
+        <svg class="ai"><use href="#i-map"/></svg>Maps
+      </a>
+    </div>
+
+    <!-- Contact Form -->
+    <form class="fm3" id="fm">
+      <div class="row2">
+        <div class="u">
+          <input id="fn" placeholder=" " required>
+          <label>Your name</label>
+        </div>
+        <div class="u">
+          <input id="fp" type="tel" placeholder=" " required>
+          <label>Phone number</label>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="u">
+          <select id="fs"></select>
+          <label>I need</label>
+        </div>
+        <div class="u">
+          <input id="fa" placeholder=" ">
+          <label>Plot / flat size</label>
+        </div>
+      </div>
+      <div class="u">
+        <textarea id="ft" rows="3" placeholder=" "></textarea>
+        <label>Tell us about your project</label>
+      </div>
+      <button class="btn f" type="submit">Send on WhatsApp &nbsp;↗</button>
+      <p class="sm" style="margin-top: 6px">Opens WhatsApp with your details filled in. Nothing is stored on a server.</p>
+    </form>
+
+    <!-- Embedded Google Map -->
+    <div class="map-wrap r pop">
+      <div class="map-head">
+        <div>
+          <small>Find us on Google Maps</small>
+          <b>Pune | Nashik, Maharashtra</b>
+        </div>
+        <a class="btn s f" href="https://www.google.com/maps/search/?api=1&query=Pune+Maharashtra" target="_blank" rel="noopener">
+          Open in Google Maps &nbsp;↗
+        </a>
+      </div>
+      <div class="map-frame">
+        <iframe src="https://www.google.com/maps?q=Pune%2C+Maharashtra&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="ft">
+      <div>
+        <div class="brand">
+          <svg data-mk viewBox="0 0 100 70"></svg>
+          <span class="bt">
+            <b>MAYUR</b>
+            <small>DESIGN STUDIO</small>
+          </span>
+        </div>
+        <p style="margin-top: 10px; max-width: 30ch">
+          Functional, affordable and premium interiors, architecture and construction across Pune and Nashik.
+        </p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#estimate">Estimate</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <a class="fs" href="https://instagram.com/mayur_designstudio" target="_blank" rel="noopener">
+          <svg class="ai"><use href="#i-ig"/></svg>Instagram
+        </a>
+        <a class="fs" href="https://facebook.com" target="_blank" rel="noopener">
+          <svg class="ai"><use href="#i-fb"/></svg>Facebook
+        </a>
+        <a class="fs" href="https://wa.me/917448207486" target="_blank" rel="noopener">
+          <svg class="ai"><use href="#i-wa"/></svg>WhatsApp
+        </a>
+      </div>
+      <div>
+        <h4>Reach us</h4>
+        <a href="tel:+917448207486">+91 74482 07486</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Pune+Maharashtra" target="_blank" rel="noopener">Pune | Nashik, Maharashtra</a>
+      </div>
+    </div>
+    <div class="fb">
+      <div class="tag" style="font-size: 9px; margin-bottom: 8px">Functional | Affordable | Premium quality</div>
+      © Mayur Design Studio · Prototype website with sample content and photos
+    </div>
+  </footer>
+
+  <!-- Floating Action Buttons -->
+  <a class="fab c" href="tel:+917448207486" aria-label="Call">
+    <svg><use href="#i-call"/></svg>
+  </a>
+  <a class="fab w" href="https://wa.me/917448207486?text=Hi%20Mayur%20Design%20Studio" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg><use href="#i-wa"/></svg>
+  </a>
+
+  <!-- Toast Notification -->
+  <div id="tt"></div>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    const $ = s => document.querySelector(s);
+    const $$ = s => [...document.querySelectorAll(s)];
+    const rm = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+    // Toast message trigger
+    function T(m) {
+      const t = $('#tt');
+      t.textContent = m;
+      t.classList.add('o');
+      clearTimeout(T.t);
+      T.t = setTimeout(() => t.classList.remove('o'), 2800);
+    }
+
+    // Animation easing function
+    const ease = t => 1 - Math.pow(1 - t, 3);
+
+    function tween(o, k, to, dur, on, done) {
+      cancelAnimationFrame(o._r);
+      const f = o[k];
+      const t0 = performance.now();
+      const step = t => {
+        const p = Math.min(1, (t - t0) / dur);
+        o[k] = f + (to - f) * ease(p);
+        on && on();
+        if (p < 1) {
+          o._r = requestAnimationFrame(step);
+        } else {
+          done && done();
+        }
+      };
+      o._r = requestAnimationFrame(step);
+    }
+
+    /* Logo mark */
+    const MKP=['M16 0 L34 24 L34 57 L25 57 L25 35 L12 59 L2 59 L11 40 Z','M43 0 L50 0 L50 52 L43 52Z','M53 7 L58 12 L58 52 L53 52Z','M33 26 L40 22 L40 52 L34 52Z','M60 24 L66 28 L66 52 L60 52Z','M89 0 L90 30 L64 43 L60 39 Z','M77 25 L91 18 L91 57 L100 62 L77 62Z','M0 67 C42 60 82 46 98 17 C96 48 52 63 6 69 Z'];
+    $$('svg[data-mk]').forEach(s=>{s.innerHTML=MKP.map(d=>`<path fill="url(#gg)" d="${d}"/>`).join('')});
+    $('#lm').innerHTML=MKP.map((d,i)=>`<path class="sh" d="${d}" style="fill:#d9a84e;--d:${(i*.16).toFixed(2)}s"/>`).join('');
+    $('#wm').innerHTML=[...'MAYUR'].map((c,i)=>`<span class="${i?'':'v'}" style="animation-delay:${1.7+i*.1}s">${c}</span>`).join('');
+
+    /* Preloader dismiss */
+    function ready() {
+      document.body.classList.add('ready');
+      document.body.style.overflow = '';
+    }
+
+    if (rm) {
+      $('#ld').remove();
+      ready();
+    } else {
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        $('#ld').classList.add('out');
+        ready();
+        setTimeout(() => $('#ld') && $('#ld').remove(), 1100);
+      }, 3900);
+    }
+
+    /* Floating embers */
+    for (let i = 0; i < 12; i++) {
+      const e = document.createElement('i');
+      e.className = 'em';
+      e.style.cssText = 'left:' + Math.random() * 100 + '%;animation-duration:' + (7 + Math.random() * 9) + 's;animation-delay:-' + Math.random() * 12 + 's;width:' + (2 + Math.random() * 4) + 'px;height:' + (2 + Math.random() * 4) + 'px';
+      $('.hero').appendChild(e);
+    }
+
+    /* Custom cursor tracking */
+    const cur = $('#cur');
+    addEventListener('mousemove', e => {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseover', e => {
+      cur.classList.toggle('big', !!(e.target.closest && e.target.closest('a,button,.svc,.cd,.pi,.btn-soc')));
+    });
+
+    /* Mobile drawer & scroll progress */
+    const mb = $('#mb'), mn = $('#mn');
+    function tg(o) {
+      mb.classList.toggle('o', o);
+      mn.classList.toggle('o', o);
+      mb.setAttribute('aria-expanded', o);
+      document.body.style.overflow = o ? 'hidden' : '';
+    }
+    mb.onclick = () => tg(!mb.classList.contains('o'));
+    $$('#mn a.l').forEach(a => a.onclick = () => tg(false));
+
+    addEventListener('scroll', () => {
+      $('#nv').classList.toggle('nsc', scrollY > 40);
+      $('#pg').style.transform = 'scaleX(' + scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight) + ')';
+    }, { passive: true });
+
+    /* Scrolling ticker content */
+    $('#mq').innerHTML = ('<span>Interiors</span><span>✦</span><span>Architecture</span><span>✦</span><span>Construction</span><span>✦</span><span>3D Visualisation</span><span>✦</span><span>Turnkey</span><span>✦</span><span>Vastu Planning</span><span>✦</span>').repeat(5);
+
+    /* Services list rendering */
+    const IC = [
+      'M6 42V20L24 6l18 14v22zM18 42V28h12v14',
+      'M10 42V8h20v34M30 42V20h10v22M16 14h8M16 22h8M16 30h8M4 42h40',
+      'M12 6h18l8 8v28H12zM30 6v8h8M18 22h14M18 30h14M18 36h8',
+      'M4 12h40v8H4zM4 20h20v8H4zM24 20h20v8H24zM4 28h40v8H4z',
+      'M24 6l4 12 12 4-12 4-4 12-4-12-12-4 12-4z',
+      'M6 42V22l18-14 18 14v20zM16 42V30h16v12M24 22v-6'
+    ];
+
+    const SV = [
+      ['Interior Design', 'Bedrooms, kitchens, living rooms and pooja units in European, minimalist or straight-line themes.'],
+      ['Architecture', 'Plans and elevations with Vastu-aligned layouts for homes and buildings.'],
+      ['Construction', 'Turnkey execution with quality materials and careful site supervision.'],
+      ['3D Visualisation', 'Realistic renders so you see every room before it is built.'],
+      ['Walkthroughs', 'Video tours of your design so you can approve each corner.'],
+      ['Turnkey Solutions', 'Design, build, furnish and hand over, ready to move in.']
+    ];
+
+    $('#sv').innerHTML = SV.map((s, i) =>
+      `<div class="svc r pop"><span class="no">0${i + 1}</span><svg viewBox="0 0 48 48"><path d="${IC[i]}"/></svg><h3>${s[0]}</h3><p>${s[1]}</p></div>`
+    ).join('');
+
+    $('#fs').innerHTML = SV.map(s => `<option>${s[0]}</option>`).join('');
+
+    /* Themes */
+    const CZ = {
+      eu: ['European', ['Timeless elegance', 'Classic details and luxury finishes', 'Warm ambience', 'Timeless comfort']],
+      mi: ['Minimalist', ['Simplicity in harmony', 'Clean lines and calm tones', 'Natural textures', 'Peaceful atmosphere']],
+      sl: ['Straight line', ['Modern, sharp and sleek', 'Sharp lines and bold contrast', 'Perfect symmetry', 'Smart, clutter-free storage']]
+    };
+    function czd(k) {
+      $('#cmp').innerHTML = Object.keys(CZ).map(x =>
+        `<div class="box ${x === k ? '' : 'dim'}"><h3 style="font-size:18px">${CZ[x][0]}</h3><ul>${CZ[x][1].map(y => `<li>${y}</li>`).join('')}</ul></div>`
+      ).join('');
+      $$('#tb button').forEach(x => x.classList.toggle('on', x.dataset.k === k));
+    }
+    $('#tb').onclick = e => { const k = e.target.dataset.k; if (k) czd(k); };
+    czd('eu');
+
+    /* Free estimate planner (no prices shown) */
+    let svc = 'Interior design';
+    const ar = $('#ar');
+    function calc() {
+      $('#av').textContent = (+ar.value).toLocaleString('en-IN');
+      $('#tot').textContent = (+ar.value).toLocaleString('en-IN') + ' sq ft';
+      $('#sl').textContent = svc;
+      $('#wa').href = 'https://wa.me/917448207486?text=' + encodeURIComponent('Hi Mayur Design Studio, I want a free estimate for ' + svc + ', ' + ar.value + ' sq ft.');
+    }
+    ar.oninput = calc;
+    $$('#ty button').forEach(b => b.onclick = () => {
+      $$('#ty button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      svc = b.dataset.r;
+      calc();
+    });
+    calc();
+
+    const U = (i, w) => 'https://images.unsplash.com/photo-' + i + '?auto=format&fit=crop&w=' + (w || 800) + '&q=70';
+
+    /* Before / After Comparison Slider */
+    const BA = [
+      ['1618221195710-dd6b41faaea6', 'raw', 'Bare shell', 'Finished interior'],
+      ['1616486338812-3dadae4b4ace', 'edge', 'Blueprint view', 'Finished interior']
+    ];
+
+    $('#bag').innerHTML = BA.map((b, i) =>
+      `<div class="ba" data-i="${i}"><div class="af" style="--im:url(${U(b[0], 1000)})"></div><div class="bf ${b[1]}" style="--im:url(${U(b[0], 1000)})"></div><div class="hd2"></div><span class="cl l">${b[2]}</span><span class="cl r">${b[3]}</span></div>`
+    ).join('');
+
+    $$('.ba').forEach(el => {
+      const bf = el.querySelector('.bf'), hd = el.querySelector('.hd2'), ix = +el.dataset.i;
+      let p = .5, auto = !rm, vis = false, dr = false;
+      const t0 = performance.now();
+      const set = v => {
+        p = Math.max(.04, Math.min(.96, v));
+        bf.style.clipPath = 'inset(0 ' + (100 - p * 100) + '% 0 0)';
+        hd.style.left = p * 100 + '%';
+      };
+      const loop = t => {
+        if (!vis) return;
+        if (auto && !dr) set(.5 + .38 * Math.sin((t - t0) / 1500 + ix));
+        requestAnimationFrame(loop);
+      };
+      new IntersectionObserver(es => {
+        const v = es[0] && es[0].isIntersecting;
+        if (v && !vis) {
+          vis = true;
+          requestAnimationFrame(loop);
+        } else if (!v) {
+          vis = false;
+        }
+      }).observe(el);
+      const pos = e => {
+        const r = el.getBoundingClientRect();
+        set((e.clientX - r.left) / (r.width || 1));
+      };
+      el.addEventListener('pointerdown', e => {
+        dr = true;
+        auto = false;
+        try { el.setPointerCapture(e.pointerId); } catch (_) {}
+        pos(e);
+      });
+      el.addEventListener('pointermove', e => {
+        if (dr) pos(e);
+      });
+      el.addEventListener('pointerup', () => dr = false);
+      set(.5);
+    });
+
+    /* Animated Building Construction Illustration */
+    {
+      const B = $('#bsv'), NS = 'http://www.w3.org/2000/svg';
+      const el = (t, a, p) => {
+        const e = document.createElementNS(NS, t);
+        for (const k in a) e.setAttribute(k, a[k]);
+        (p || B).appendChild(e);
+        return e;
+      };
+      const GY = 470, FH = 84, NF = 4, XS = [200, 310, 420, 530, 620];
+      const gr = id => el('g', { id });
+      const gl = el('ellipse', { cx: 410, cy: 340, rx: 330, ry: 190, fill: 'url(#gl)', opacity: 0 });
+      const gG = gr('gg2'), gF = gr('gf'), gS = gr('gs');
+      const FL = [...Array(NF)].map((_, i) => gr('fl' + i));
+      const gR = gr('gr'), gC = gr('gc');
+
+      el('line', { x1: 30, y1: GY, x2: 770, y2: GY, class: 'd gd' }, gG);
+      for (let x = 44; x < 770; x += 34) el('line', { x1: x, y1: GY + 3, x2: x - 12, y2: GY + 15, class: 'hf' }, gG);
+      el('rect', { x: 170, y: GY, width: 480, height: 26, class: 'd' }, gF);
+      for (let x = 190; x < 650; x += 40) el('line', { x1: x, y1: GY, x2: x, y2: GY + 26, class: 'hf' }, gF);
+
+      FL.forEach((g, i) => {
+        const yb = GY - i * FH, yt = yb - FH;
+        el('rect', { x: 200, y: yt, width: 420, height: FH, class: 'wl' }, g);
+        XS.forEach(x => el('line', { x1: x, y1: yb, x2: x, y2: yt, class: 'd' }, g));
+        el('rect', { x: 170, y: yt - 8, width: 480, height: 8, class: 'd gd' }, g);
+        [0, 1, 3].forEach(k => el('rect', { x: XS[k] + (k == 3 ? 18 : 30), y: yt + 20, width: 50, height: 34, class: 'wn' }, g));
+        if (i == 0) el('rect', { x: XS[2] + 34, y: yb - 50, width: 42, height: 50, class: 'wn' }, g);
+        else el('rect', { x: XS[2] + 30, y: yt + 20, width: 50, height: 34, class: 'wn' }, g);
+      });
+
+      const RY = GY - NF * FH - 26;
+      el('rect', { x: 170, y: RY, width: 480, height: 18, class: 'd gd' }, gR);
+      el('rect', { x: 540, y: RY - 38, width: 56, height: 38, class: 'd' }, gR);
+      el('line', { x1: 200, y1: RY, x2: 200, y2: RY - 16, class: 'd' }, gR);
+      el('line', { x1: 620, y1: RY, x2: 620, y2: RY - 16, class: 'd' }, gR);
+
+      for (let y = GY; y > GY - NF * FH; y -= FH / 2) {
+        el('line', { x1: 150, y1: y, x2: 196, y2: y, class: 'd scf' }, gS);
+      }
+      el('line', { x1: 150, y1: GY, x2: 150, y2: GY - NF * FH, class: 'd scf' }, gS);
+      el('line', { x1: 196, y1: GY, x2: 196, y2: GY - NF * FH, class: 'd scf' }, gS);
+
+      el('line', { x1: 700, y1: GY, x2: 700, y2: 70, class: 'd gd' }, gC);
+      el('line', { x1: 724, y1: GY, x2: 724, y2: 70, class: 'd gd' }, gC);
+      let zz = 'M700 ' + GY;
+      for (let y = GY, k = 0; y > 74; y -= 36, k++) zz += ' L' + (k % 2 ? 700 : 724) + ' ' + (y - 36);
+      el('path', { d: zz, class: 'd' }, gC);
+      el('line', { x1: 560, y1: 70, x2: 792, y2: 70, class: 'd gd' }, gC);
+      el('path', { d: 'M700 70L712 40L724 70M712 40L560 70M712 40L792 70', class: 'd' }, gC);
+      el('rect', { x: 766, y: 70, width: 26, height: 22, class: 'd' }, gC);
+
+      const hk = el('g', { class: 'hk' }, gC);
+      el('line', { x1: 600, y1: 70, x2: 600, y2: 150, class: 'd' }, hk);
+      el('rect', { x: 586, y: 150, width: 28, height: 18, class: 'd gd' }, hk);
+      el('line', { x1: 586, y1: 150, x2: 600, y2: 136, class: 'd' }, hk);
+      el('line', { x1: 614, y1: 150, x2: 600, y2: 136, class: 'd' }, hk);
+
+      const ALL = $$('#bsv .d');
+      ALL.forEach(e => {
+        let L = 300;
+        try { L = e.getTotalLength() || 300; } catch (_) {}
+        e._L = L;
+        e.style.strokeDasharray = L;
+        e.style.strokeDashoffset = L;
+      });
+
+      const ph = (a, b, p) => Math.max(0, Math.min(1, (p - a) / (b - a)));
+      const drw = (g, t) => g.querySelectorAll('.d').forEach(e => e.style.strokeDashoffset = e._L * (1 - t));
+
+      function apply(p) {
+        drw(gG, ph(0, .1, p));
+        drw(gF, ph(.1, .2, p));
+        drw(gC, ph(.16, .4, p));
+        const sc = Math.min(ph(.22, .3, p), 1 - ph(.7, .8, p));
+        gS.style.opacity = sc;
+        drw(gS, ph(.22, .3, p));
+        const fin = ph(.74, .86, p), lights = ph(.8, .92, p);
+        FL.forEach((g, i) => {
+          const s = .22 + .1 * i, t = ph(s, s + .08, p), t2 = ph(s + .05, s + .12, p);
+          g.querySelectorAll('.d').forEach(e => e.style.strokeDashoffset = e._L * (1 - t));
+          g.querySelectorAll('.wl').forEach(e => e.style.fillOpacity = .05 * t2 + .2 * fin);
+          g.querySelectorAll('.wn').forEach(e => {
+            e.style.strokeOpacity = t2;
+            e.style.fillOpacity = .95 * lights;
+          });
+        });
+        drw(gR, ph(.62, .74, p));
+        gl.setAttribute('opacity', ph(.88, 1, p));
+      }
+
+      const sec = $('#build'), S2 = $$('.stp'), TH = [0, .1, .2, .7, .9];
+      let c = 0, t = 0, raf = 0, lk = false;
+      const set = p => {
+        apply(p);
+        S2.forEach((x, i) => x.classList.toggle('on', p >= TH[i] - .001));
+      };
+      const calcP = () => {
+        const r = sec.getBoundingClientRect(), h = innerHeight * .45, tot = sec.offsetHeight - innerHeight;
+        return Math.min(1, Math.max(0, ((h - r.top) / (tot + h)) / .9));
+      };
+      const tick = () => {
+        raf = 0;
+        if (lk) return;
+        c += (t - c) * .14;
+        if (Math.abs(t - c) < .001) c = t;
+        set(c);
+        if (c >= .999) {
+          lk = true;
+          set(1);
+          return;
+        }
+        if (c !== t) raf = requestAnimationFrame(tick);
+      };
+      const upd = () => {
+        if (lk) return;
+        t = calcP();
+        if (!raf) raf = requestAnimationFrame(tick);
+      };
+
+      if (rm) {
+        lk = true;
+        set(1);
+      } else {
+        set(0);
+        addEventListener('scroll', upd, { passive: true });
+        addEventListener('resize', upd);
+        upd();
+      }
+    }
+
+    /* Client Reviews Carousel */
+    const RV = [
+      ['Sample Client', 'Pune', 'They understood our budget and still gave us a premium look. The Vastu guidance was spot on.'],
+      ['Sample Client', 'Nashik', 'Design and execution by the same team meant zero confusion. Handover was on time.'],
+      ['Sample Client', 'Pune', 'The 3D walkthrough matched the finished flat almost exactly. Very happy.'],
+      ['Sample Client', 'Nashik', 'Our showroom looks brand new and the work was finished quickly with neat detailing.']
+    ];
+
+    $('#tk').innerHTML = RV.map(r =>
+      `<div class="tc2"><q>${r[2]}</q><div class="tw2"><span class="av">${r[0][0]}</span><div><b>${r[0]}</b><span class="s">${r[1]}</span><div class="st5">★★★★★</div></div></div></div>`
+    ).join('');
+
+    {
+      const TK = $('#tk'), TC = $$('.tc2'), TW = $('#tsw'), td = $('#dt');
+      const tm = { x: 0 }, NT = TC.length;
+      let ti = 0, tt, pz = false, dr = false, ts = 0, tx0 = 0, tl = 0, tlt = 0, tv = 0, mv = false;
+
+      TC.forEach((_, i) => {
+        const d = document.createElement('i');
+        d.onclick = () => tgo(i);
+        td.appendChild(d);
+      });
+
+      const tcw = () => TC[0].offsetWidth + 14;
+      const tb = i => -i * tcw();
+      const tset = () => TK.style.transform = 'translateX(' + tm.x + 'px)';
+      const tcl = k => Math.max(0, Math.min(NT - 1, k));
+
+      const tact = k => {
+        TC.forEach((c, j) => c.classList.toggle('on', j === k));
+        $$('#dt i').forEach((d, j) => d.classList.toggle('on', j === k));
+      };
+
+      function tgo(i, ins) {
+        ti = ((i % NT) + NT) % NT;
+        tact(ti);
+        if (ins) {
+          cancelAnimationFrame(tm._r);
+          tm.x = tb(ti);
+          tset();
+        } else {
+          tween(tm, 'x', tb(ti), 900, tset);
+        }
+        clearInterval(tt);
+        if (!rm) {
+          tt = setInterval(() => {
+            if (!pz && !dr) tgo(ti + 1);
+          }, 4500);
+        }
+      }
+
+      TW.addEventListener('pointerdown', e => {
+        dr = true;
+        mv = false;
+        ts = tl = e.clientX;
+        tx0 = tm.x;
+        tlt = e.timeStamp;
+        tv = 0;
+        cancelAnimationFrame(tm._r);
+        try { TW.setPointerCapture(e.pointerId); } catch (_) {}
+      });
+
+      TW.addEventListener('pointermove', e => {
+        if (!dr) return;
+        const dx = e.clientX - ts;
+        if (Math.abs(dx) > 6) mv = true;
+        if (!mv) return;
+        tv = (e.clientX - tl) / Math.max(1, e.timeStamp - tlt);
+        tl = e.clientX;
+        tlt = e.timeStamp;
+        tm.x = Math.max(tb(NT - 1) - 40, Math.min(40, tx0 + dx));
+        tset();
+        tact(tcl(Math.round(-tm.x / tcw())));
+      });
+
+      const up = () => {
+        if (!dr) return;
+        dr = false;
+        if (!mv) return;
+        tgo(tcl(Math.round(-(tm.x + tv * 250) / tcw())));
+      };
+
+      TW.addEventListener('pointerup', up);
+      TW.addEventListener('pointercancel', up);
+      TW.onmouseenter = () => pz = true;
+      TW.onmouseleave = () => pz = false;
+
+      addEventListener('resize', () => tgo(ti, 1));
+      addEventListener('load', () => tgo(ti, 1));
+      tgo(0, 1);
+    }
+
+    /* 3D sliding carousel */
+    {
+      const PJ = [['Modern villa exterior','Nashik','1600607687939-ce8a6c25118c'],['Luxury master bedroom','Pune','1616486338812-3dadae4b4ace'],['Minimal living room','Pune','1618221195710-dd6b41faaea6'],['Elevation and lighting','Nashik','1600585154340-be6161a56a0c'],['Modular kitchen','Pune','1556909114-f6e7ad7d3136'],['Apartment tower','Pune','1560448204-e02f11c3d0e2'],['Warm family lounge','Nashik','1600210492486-724fe5c67fb0']];
+      const C = $('#c3d'), dts = $('#c3dt'); let a = 0, sx = null, hov = false, tm;
+      PJ.forEach((p, i) => {
+        const d = document.createElement('div'); d.className = 'c3i';
+        d.style.backgroundImage = `url(${U(p[2], 700)}),linear-gradient(135deg,#ffd0c4,#e6def3)`;
+        d.innerHTML = `<span class="no">0${i + 1}</span><div class="cap"><h3>${p[0]}</h3><span>${p[1]}</span></div>`;
+        d.onclick = () => { if (!mvd) go(i); };
+        C.appendChild(d);
+        const b = document.createElement('i'); b.onclick = () => go(i); dts.appendChild(b);
+      });
+      const items = $$('.c3i'); let mvd = false;
+      function go(i) {
+        a = Math.max(0, Math.min(PJ.length - 1, i));
+        items.forEach((el, k) => {
+          const d = k - a, ab = Math.abs(d);
+          el.classList.toggle('act', !d);
+          el.style.transform = `translateX(${d * 58}%) translateZ(${-ab * 150}px) rotateY(${-Math.sign(d) * Math.min(ab, 2) * 34}deg) scale(${1 - ab * .06})`;
+          el.style.opacity = ab > 2 ? 0 : 1 - ab * .22;
+          el.style.zIndex = 10 - ab;
+          el.style.filter = ab ? `brightness(${1 - ab * .12}) saturate(.9)` : 'none';
+          el.style.pointerEvents = ab > 2 ? 'none' : 'auto';
+        });
+        $$('#c3dt i').forEach((x, k) => x.classList.toggle('on', k === a));
+        $('#c3p').disabled = a < 1; $('#c3x').disabled = a > PJ.length - 2;
+      }
+      $('#c3p').onclick = () => go(a - 1); $('#c3x').onclick = () => go(a + 1);
+      C.addEventListener('pointerdown', e => { sx = e.clientX; mvd = false; });
+      addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 40) { mvd = true; go(a + (dx < 0 ? 1 : -1)); setTimeout(() => mvd = false, 60); } });
+      C.onmouseenter = () => hov = true; C.onmouseleave = () => hov = false;
+      addEventListener('keydown', e => { if (e.key === 'ArrowRight') go(a + 1); if (e.key === 'ArrowLeft') go(a - 1); });
+      if (!rm) tm = setInterval(() => { if (!hov && sx === null) go(a >= PJ.length - 1 ? 0 : a + 1); }, 3800);
+      go(0);
+    }
+
+    /* Counter number tweening */
+    function count(el) {
+      const v = +el.dataset.n, c = { v: 0 };
+      tween(c, 'v', v, 1800, () => {
+        el.textContent = (el.dataset.p || '') + Math.round(c.v).toLocaleString('en-IN') + (el.dataset.s || '');
+      });
+    }
+
+    $$('[data-n]').forEach(el => {
+      if (rm) {
+        el.textContent = (el.dataset.p || '') + (+el.dataset.n).toLocaleString('en-IN') + (el.dataset.s || '');
+        return;
+      }
+      const o = new IntersectionObserver(es => {
+        if (es[0].isIntersecting) {
+          count(el);
+          o.disconnect();
+        }
+      });
+      o.observe(el);
+    });
+
+    /* Reveal animations on scroll */
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      io.unobserve(el);
+      el.classList.add('in');
+      setTimeout(() => {
+        el.classList.remove('r', 'in', 'pop');
+        el.style.transitionDelay = '';
+      }, 1500);
+    }), { rootMargin: '0px 0px -6% 0px' });
+
+    $$('.r').forEach(el => {
+      const sib = [...el.parentNode.children].indexOf(el);
+      el.style.transitionDelay = Math.min(sib, 5) * .08 + 's';
+      io.observe(el);
+    });
+
+    /* Contact form submission -> direct to WhatsApp */
+    $('#fm').onsubmit = e => {
+      e.preventDefault();
+      const m = 'Hi Mayur Design Studio, I am ' + $('#fn').value.trim() + ' (' + $('#fp').value.trim() + ').\n' +
+        'Service: ' + $('#fs').value +
+        ($('#fa').value.trim() ? '\nPlot size: ' + $('#fa').value.trim() : '') +
+        '\n' + $('#ft').value.trim();
+      T('Opening WhatsApp…');
+      setTimeout(() => window.open('https://wa.me/917448207486?text=' + encodeURIComponent(m), '_blank'), 500);
+    };
+  </script>
+</body>
+</html>
